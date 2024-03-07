@@ -14,8 +14,9 @@
 """ HTTP-Heartbeat via Flask. """
 
 import os
-from flask import Flask
+from flask import Flask, request
 from time import ctime
+from logging import getLogger, basicConfig
 
 __version__ = "0.1"
 __author__ = "klaus-moser"
@@ -24,10 +25,25 @@ __date__ = ctime(os.path.getmtime(__file__))
 # Create & Initialize Flask app
 app = Flask(__name__)
 
+# Logger
+log = getLogger("http_heartbeat_flask")
+basicConfig(filename="logs/http_heartbeat_flask.log",
+            filemode="w",
+            level="INFO")
+
 
 @app.route('/health')
-def health_check():
-    # TODO: further checks
+def health_check() -> tuple:
+    """
+    Health-check that returns a 200 response.
+
+    :return: (status, status_code)
+    """
+
+    remote_addr = request.remote_addr
+    remote_user = request.remote_user
+    log.info("TIME--> {} IP--> {} USER--> {}".format(ctime(), remote_addr, remote_user))
+
     return "ok", 200
 
 
