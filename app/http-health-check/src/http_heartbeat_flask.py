@@ -13,17 +13,21 @@
 
 """ HTTP-Heartbeat via Flask. """
 
+
 import os
 from flask import Flask, request
 from time import ctime
 from logging import getLogger, basicConfig
 
+
 __version__ = "0.1"
 __author__ = "klaus-moser"
 __date__ = ctime(os.path.getmtime(__file__))
 
+
 # Create & Initialize Flask app
 app = Flask(__name__)
+
 
 # Logger
 log = getLogger("http_heartbeat_flask")

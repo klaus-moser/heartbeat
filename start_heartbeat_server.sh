@@ -10,4 +10,4 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 # start flask server
-python src/http_heartbeat_flask.py
+python app/http-health-check/src/http_heartbeat_flask.py
